@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">dbbbbb</string>
+    <string name="connect_button_label">Connect</string>
+    <string name="host_input_label">Host</string>
+    <string name="port_input_label">Port</string>
+    <string name="user_input_label">User</string>
+    <string name="pass_input_label">Pass</string>
+</resources>
