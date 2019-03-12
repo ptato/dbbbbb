@@ -3,8 +3,8 @@ from pathlib import Path
 from pprint import pprint
 import json, os
 
-data_folder = 'C:/atajo/Server/TestFiles'
-allowed_extensions = [ 'mp3', 'flac' ]
+data_folder = '/home/pi/Files'
+allowed_extensions = [ '.mp3', '.flac' ]
 metadata_file = 'md.json'
 whitelisted_users = { 'ptato': 'ptato' }
 
@@ -17,7 +17,7 @@ def updated_metadata_file():
     metadata = dict()
     metadata['root'] = []
     for fp in Path(data_folder).glob('**/*'):
-        if any(( fp.suffix == ext for ext in allowed_extensions)):
+        if any(( fp.suffix == ext for ext in allowed_extensions )):
             metadata['root'].append(str(fp))
     return metadata
 
@@ -26,7 +26,7 @@ def updated_metadata_file():
 def serve_static(filepath):
     if filepath == metadata_file:
         return updated_metadata_file()
-    elif any(( filepath.endswith(ext) for ext in allowed_extensions)):
+    elif any(( filepath.endswith(ext) for ext in allowed_extensions )):
         return static_file(filepath, root=data_folder)
     else:
         abort(403, 'Disallowed file extension')
@@ -37,4 +37,4 @@ def serve_favicon():
 
 # todo: check https://github.com/nickbabcock/bottle-ssl
 
-run(host='localhost', port=8080, debug=True)
+run(host='192.168.1.51', port=8080, debug=True, reloader=True)
