@@ -1,4 +1,4 @@
-package com.ptato.dbbbbb;
+package com.ptato.dbbbbb.ui;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ptato.dbbbbb.R;
 import com.ptato.dbbbbb.data.ConnectionParameters;
 
 public class ConnectActivity extends AppCompatActivity

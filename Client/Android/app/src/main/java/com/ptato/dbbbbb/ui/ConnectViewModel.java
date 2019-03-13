@@ -1,4 +1,4 @@
-package com.ptato.dbbbbb;
+package com.ptato.dbbbbb.ui;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
