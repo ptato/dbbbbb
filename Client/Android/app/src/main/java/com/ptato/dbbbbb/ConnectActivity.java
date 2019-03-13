@@ -1,8 +1,8 @@
 package com.ptato.dbbbbb;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +18,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ConnectActivity extends AppCompatActivity
 {
@@ -45,7 +44,7 @@ public class ConnectActivity extends AppCompatActivity
                 ArrayList<String> fileNames = new ArrayList<>();
                 try
                 {
-                    URL url = new URL("192.168.1.51:8080/static/md.json");
+                    URL url = new URL(host + ":" + port + "/static/md.json");
                     HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
                     urlConnection.setRequestProperty("Authorization", "Basic " + user + ":" + pass);
 
