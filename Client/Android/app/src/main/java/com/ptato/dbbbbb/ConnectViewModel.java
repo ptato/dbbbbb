@@ -4,15 +4,15 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.ptato.dbbbbb.data.ConnectionParameters;
+
 public class ConnectViewModel extends ViewModel
 {
-    private MutableLiveData<String> hostData;
-    private MutableLiveData<String> portData;
-    private MutableLiveData<String> userData;
-    private MutableLiveData<String> passData;
+    private MutableLiveData<ConnectionParameters> connectionData;
 
     public ConnectViewModel(String host, String port, String user, String pass)
     {
+        /*
         hostData = new MutableLiveData<>();
         hostData.setValue(host);
         portData = new MutableLiveData<>();
@@ -21,39 +21,15 @@ public class ConnectViewModel extends ViewModel
         userData.setValue(user);
         passData = new MutableLiveData<>();
         passData.setValue(pass);
+        */
     }
 
-    public LiveData<String> getHost()
+    public LiveData<ConnectionParameters> getConnectionParameters()
     {
-        return hostData;
+        return connectionData;
     }
-    public LiveData<String> getPort()
+    public void setConnectionParameters(ConnectionParameters cp)
     {
-        return portData;
-    }
-    public LiveData<String> getUser()
-    {
-        return userData;
-    }
-    public LiveData<String> getPass()
-    {
-        return passData;
-    }
-
-    public void setHost(String s)
-    {
-        hostData.postValue(s);
-    }
-    public void setPort(String s)
-    {
-        portData.postValue(s);
-    }
-    public void setUser(String s)
-    {
-        userData.postValue(s);
-    }
-    public void setPass(String s)
-    {
-        passData.postValue(s);
+        connectionData.setValue(cp);
     }
 }

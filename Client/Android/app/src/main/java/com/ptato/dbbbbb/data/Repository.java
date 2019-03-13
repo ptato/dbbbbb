@@ -40,15 +40,15 @@ public class Repository
         return instance;
     }
 
-    public LiveData<List<String>> getAvailableFileNames()
+    public LiveData<List<String>> getAvailableFileNames(ConnectionParameters cp)
     {
         MutableLiveData<List<String>> result = new MutableLiveData<>();
         result.setValue(new ArrayList<String>());
-        new GetAvailableFileNamesTask(result).execute();
+        new GetAvailableFileNamesTask(result).execute(cp);
         return result;
     }
 
-    private static class GetAvailableFileNamesTask extends AsyncTask<Void, Void, List<String>>
+    private static class GetAvailableFileNamesTask extends AsyncTask<ConnectionParameters, Void, List<String>>
     {
         private MutableLiveData<List<String>> liveData;
         public GetAvailableFileNamesTask(MutableLiveData<List<String>> ld)
@@ -57,18 +57,15 @@ public class Repository
         }
 
         @Override
-        protected List<String> doInBackground(Void... voids)
+        protected List<String> doInBackground(ConnectionParameters... cps)
         {
             ArrayList<String> fileNames = new ArrayList<>();
-            String host = "";
-            String port = "";
-            String user = "";
-            String pass = "";
+            ConnectionParameters cp = cps[0];
             try
             {
-                URL url = new URL(host + ":" + port + "/static/md.json");
+                URL url = new URL(cp.host + ":" + cp.port + "/static/md.json");
                 HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
-                urlConnection.setRequestProperty("Authorization", "Basic " + user + ":" + pass);
+                urlConnection.setRequestProperty("Authorization", "Basic " + cp.user + ":" + cp.pass);
 
                 BufferedReader bufferedReader =
                         new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
