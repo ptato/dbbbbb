@@ -125,7 +125,7 @@ public class ConnectActivity extends AppCompatActivity
                 }
 
                 Intent startBrowse = new Intent(ConnectActivity.this, BrowseFilesActivity.class);
-                startBrowse.putStringArrayListExtra("filenames", fileNames);
+                startBrowse.putStringArrayListExtra(BrowseFilesActivity.FILE_NAMES_EXTRA, fileNames);
                 ConnectActivity.this.startActivity(startBrowse);
             }
         });
