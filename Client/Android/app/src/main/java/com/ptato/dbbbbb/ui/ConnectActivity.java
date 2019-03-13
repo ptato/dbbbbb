@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ptato.dbbbbb.R;
 import com.ptato.dbbbbb.data.ConnectionParameters;
+import com.ptato.dbbbbb.data.Repository;
 
 public class ConnectActivity extends AppCompatActivity
 {
@@ -29,7 +30,9 @@ public class ConnectActivity extends AppCompatActivity
         final TextView passInput = findViewById(R.id.passInput);
         final Button connectButton = findViewById(R.id.connectButton);
 
-        viewModel = ViewModelProviders.of(this).get(ConnectViewModel.class);
+        Repository repository = Repository.getInstance(this);
+        AppViewModelFactory factory = new AppViewModelFactory(repository, new ConnectionParameters("","","",""));
+        viewModel = ViewModelProviders.of(this, factory).get(ConnectViewModel.class);
         viewModel.getConnectionParameters().observe(this, new Observer<ConnectionParameters>()
         {
             @Override

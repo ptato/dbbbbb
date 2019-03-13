@@ -10,10 +10,10 @@ public class ConnectViewModel extends ViewModel
 {
     private MutableLiveData<ConnectionParameters> connectionData;
 
-    public ConnectViewModel(String host, String port, String user, String pass)
+    public ConnectViewModel(ConnectionParameters cp)
     {
         connectionData = new MutableLiveData<>();
-        connectionData.setValue(new ConnectionParameters(host, port, user, pass));
+        connectionData.setValue(cp);
     }
 
     public LiveData<ConnectionParameters> getConnectionParameters()

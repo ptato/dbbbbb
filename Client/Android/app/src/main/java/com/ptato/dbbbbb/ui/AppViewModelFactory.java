@@ -18,12 +18,17 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory
         this.cp = cp;
     }
 
+    public AppViewModelFactory(@NonNull ConnectionParameters cp)
+    {
+        this.cp = cp;
+    }
+
     @NonNull @Override @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass)
     {
         if (BrowseFilesViewModel.class.getName().equals(modelClass.getName()))
             return (T) new BrowseFilesViewModel(repository, cp);
         else
-            return (T) new ConnectViewModel(null, null, null, null);
+            return (T) new ConnectViewModel(cp);
     }
 }
