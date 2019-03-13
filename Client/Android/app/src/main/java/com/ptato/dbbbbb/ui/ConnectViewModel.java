@@ -12,16 +12,8 @@ public class ConnectViewModel extends ViewModel
 
     public ConnectViewModel(String host, String port, String user, String pass)
     {
-        /*
-        hostData = new MutableLiveData<>();
-        hostData.setValue(host);
-        portData = new MutableLiveData<>();
-        portData.setValue(port);
-        userData = new MutableLiveData<>();
-        userData.setValue(user);
-        passData = new MutableLiveData<>();
-        passData.setValue(pass);
-        */
+        connectionData = new MutableLiveData<>();
+        connectionData.setValue(new ConnectionParameters(host, port, user, pass));
     }
 
     public LiveData<ConnectionParameters> getConnectionParameters()
