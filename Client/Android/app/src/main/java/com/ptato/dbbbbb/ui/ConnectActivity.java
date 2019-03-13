@@ -3,6 +3,7 @@ package com.ptato.dbbbbb.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,14 @@ import com.ptato.dbbbbb.data.Repository;
 
 public class ConnectActivity extends AppCompatActivity
 {
+    private static final String PREFERENCE_FILE_NAME = "ConnectionDetails";
+    private static final String PREFERENCE_KEY_HOST = "ConnectionDetailsHost";
+    private static final String PREFERENCE_KEY_PORT = "ConnectionDetailsPort";
+    private static final String PREFERENCE_KEY_USER = "ConnectionDetailsUser";
+    private static final String PREFERENCE_KEY_PASS = "ConnectionDetailsPass";
+
     private ConnectViewModel viewModel;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,8 +38,20 @@ public class ConnectActivity extends AppCompatActivity
         final TextView passInput = findViewById(R.id.passInput);
         final Button connectButton = findViewById(R.id.connectButton);
 
+        preferences = getSharedPreferences(PREFERENCE_FILE_NAME, MODE_PRIVATE);
+        String host = preferences.getString(PREFERENCE_KEY_HOST, "localhost");
+        String port = preferences.getString(PREFERENCE_KEY_PORT, "80");
+        String user = preferences.getString(PREFERENCE_KEY_USER, "");
+        // TODO FIXME Security
+        // TODO FIXME Security
+        // TODO FIXME Security
+        // TODO FIXME Security
+        // TODO FIXME Security
+        String pass = preferences.getString(PREFERENCE_KEY_PASS, "");
+
         Repository repository = Repository.getInstance(this);
-        AppViewModelFactory factory = new AppViewModelFactory(repository, new ConnectionParameters("","","",""));
+        AppViewModelFactory factory = new AppViewModelFactory(repository,
+                new ConnectionParameters(host, port, user, pass));
         viewModel = ViewModelProviders.of(this, factory).get(ConnectViewModel.class);
         viewModel.getConnectionParameters().observe(this, new Observer<ConnectionParameters>()
         {
@@ -67,5 +87,21 @@ public class ConnectActivity extends AppCompatActivity
                 ConnectActivity.this.startActivity(startBrowse);
             }
         });
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        ConnectionParameters cp = viewModel.getConnectionParameters().getValue();
+        SharedPreferences.Editor ed = preferences.edit();
+        if (cp != null)
+        {
+            ed.putString(PREFERENCE_KEY_HOST, cp.host);
+            ed.putString(PREFERENCE_KEY_PORT, cp.port);
+            ed.putString(PREFERENCE_KEY_USER, cp.user);
+            ed.putString(PREFERENCE_KEY_PASS, cp.pass);
+        }
+        ed.apply();
     }
 }
