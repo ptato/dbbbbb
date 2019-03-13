@@ -63,7 +63,10 @@ public class Repository
             ConnectionParameters cp = cps[0];
             try
             {
-                URL url = new URL(cp.host + ":" + cp.port + "/static/md.json");
+                URL url = null;
+                if (cp.host.equals("80")) url = new URL(cp.host); // FIXME HACK https://www.station307.com
+                else                      url = new URL(cp.host + ":" + cp.port + "/static/md.json");
+
                 HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
                 urlConnection.setRequestProperty("Authorization", "Basic " + cp.user + ":" + cp.pass);
 
