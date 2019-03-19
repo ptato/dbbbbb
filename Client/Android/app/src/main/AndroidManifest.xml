@@ -15,20 +15,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".ui.ConnectActivity">
+        <activity
+            android:name=".ui.ConnectActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.BrowseFilesActivity">
+        <activity
+            android:name=".ui.BrowseFilesActivity"
+            android:theme="@style/Theme.Design.Light">
         </activity>
 
         <activity
             android:name=".ui.AppSettingsActivity"
             android:label="dbbbbb/settings"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.Design.Light.NoActionBar">
         </activity>
     </application>
 </manifest>
