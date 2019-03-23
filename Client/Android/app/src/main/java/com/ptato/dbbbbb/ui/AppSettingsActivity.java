@@ -20,6 +20,8 @@ import com.ptato.dbbbbb.R;
 
 public class AppSettingsActivity extends AppCompatActivity
 {
+    public final static String FILE_STORAGE_FOLDER_PREFERENCE_KEY = "pref_file_storage_folder";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -41,7 +43,6 @@ public class AppSettingsActivity extends AppCompatActivity
     public static class AppSettingsFragment extends PreferenceFragmentCompat
     {
         private final static int PICK_FILE_REQUEST_CODE = 100;
-        private final static String FILE_STORAGE_FOLDER_PREFERENCE_KEY = "pref_file_storage_folder";
 
         private Preference fileStorageFolder = null;
 
