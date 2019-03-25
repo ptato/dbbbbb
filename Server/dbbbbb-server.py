@@ -1,9 +1,11 @@
 from bottle import *
 from pathlib import Path
 from pprint import pprint
+from environment import environment
 import json, os
 
-data_folder = '/home/pi/Files'
+
+data_folder = environment['data_folder']
 allowed_extensions = [ '.mp3', '.flac' ]
 metadata_file = 'md.json'
 whitelisted_users = { 'ptato': 'ptato' }
@@ -37,4 +39,4 @@ def serve_favicon():
 
 # todo: check https://github.com/nickbabcock/bottle-ssl
 
-run(host='192.168.1.51', port=8080, debug=True, reloader=True)
+run(host=environment['host'], port=environment['port'], debug=True, reloader=True)
